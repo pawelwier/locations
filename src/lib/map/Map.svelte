@@ -1,12 +1,15 @@
 <script lang="ts">
 import { onMount } from 'svelte';
-import { map, tileLayer, type LatLngTuple } from 'leaflet'
+import { map, tileLayer, type LatLngTuple, Map } from 'leaflet'
+import { addMapEventListeners } from './utils';
+import ContextMenu from './ContextMenu.svelte';
 
 const mapUrl: string = 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png'
 const initialView: LatLngTuple = [52, 19]
+let mapElement: HTMLElement | null
 
-const createMap = (container: HTMLElement) => {
-  let m = map(container, {preferCanvas: true }).setView(initialView, 5.22);
+function createMap(container: HTMLElement): Map {
+  let m = map(container, {preferCanvas: true }).setView(initialView, 6.22);
   tileLayer(
     'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',
     {
@@ -14,13 +17,17 @@ const createMap = (container: HTMLElement) => {
     }
   ).addTo(m)
 
+  addMapEventListeners(m)
+
   return m
 }
 
 onMount(() => {
-  const mapElement: HTMLElement | null = document.getElementById('map-container')
+  mapElement = document.getElementById('map-container')
   if (mapElement) createMap(mapElement)
 })
 </script>
 
 <div id="map-container" />
+
+<ContextMenu />
