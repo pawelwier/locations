@@ -20,6 +20,7 @@ main {
 #map-container {
   margin: 0.8rem;
   width: 100%;
+  max-width: 50rem;
   height: 30rem;
   z-index: 20;
 }
@@ -39,4 +40,23 @@ main {
   background-color: var(--grey-dark);
   z-index: 99;
   border-radius: 0.3rem;
+}
+
+.add-location-btn {
+  background-color: #4310b8;
+  color: #FFF;
+  cursor: pointer;
+  outline: none;
+  border: none;
+  border-radius: 0.45rem;
+  width:100%;
+  text-transform: uppercase;
+}
+
+.add-location-btn:hover {
+  opacity: 0.8;
+}
+
+.leaflet-popup-content {
+  margin: 0.2rem;
 }
