@@ -1,8 +1,9 @@
 <script lang="ts">
 import { onMount } from 'svelte'
-import { map as drawMap, marker, tileLayer, type LatLngTuple, Map, LeafletEvent } from 'leaflet'
+import { map as drawMap, marker, tileLayer, type LatLngTuple, Map, Marker } from 'leaflet'
 import { addMapEventListeners } from './utils'
 import { type Location } from '../../types'
+  import { selectedLocationStore } from '../../stores/mapStores';
 
 const mapUrl: string = 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png'
 const initialView: LatLngTuple = [52, 19]
@@ -26,13 +27,16 @@ function createMap(container: HTMLElement): Map {
 }
 
 function displayLocationMarkers(m: Map, locations: Location[]): void {
-  locations.forEach(({ latlng }) => {
-    marker(latlng).addTo(m)
+  locations.forEach(location => {
+    const { latlng } = location
+    const locationMarker: Marker = marker(latlng).addTo(m)
+    locationMarker.on('click', e => {
+      selectedLocationStore.set(location)
+    })
   })
 }
 
 $: displayLocationMarkers(map, locs)
-
 
 onMount(() => {
   mapElement = document.getElementById('map-container')
@@ -41,11 +45,12 @@ onMount(() => {
     createMap(mapElement)
 
     /* TODO: remove 'locs', reactivity on db results */
-    map.on('marker-added', (e) => {
+    map.on('marker-added', e => {
       const x = e as unknown as { locations: Location[] }
       locs = x.locations
     })
   }
 })
 </script>
+
 <div id="map-container" />

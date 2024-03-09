@@ -1,62 +1,24 @@
+@import '/src/styles/modal.css';
+@import '/src/styles/utils.css';
+@import '/src/styles/map.css';
+@import '/src/styles/ui.css';
+
 /* TODO: divide file */
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   background-color: var(--grey-light);
   
+  /* variables */
   /* colors */
   --grey-light: #c4c4c4;
   --grey-dark: #383535;
 }
 
 main {
+  position: relative;
   display: flex;
   justify-content: center;
   text-align: center;
+  min-width: 20rem;
   width: 100%;
-}
-
-/* Map */
-
-#map-container {
-  margin: 0.8rem;
-  width: 100%;
-  max-width: 50rem;
-  height: 30rem;
-  z-index: 20;
-}
-
-#map-container:hover {
-  cursor: default;
-}
-
-
-/* Context menu */
-
-.context-menu-container {
-  position: absolute;
-  width: 8rem;
-  height: 8rem;
-  color: #FFF;
-  background-color: var(--grey-dark);
-  z-index: 99;
-  border-radius: 0.3rem;
-}
-
-.add-location-btn {
-  background-color: #4310b8;
-  color: #FFF;
-  cursor: pointer;
-  outline: none;
-  border: none;
-  border-radius: 0.45rem;
-  width:100%;
-  text-transform: uppercase;
-}
-
-.add-location-btn:hover {
-  opacity: 0.8;
-}
-
-.leaflet-popup-content {
-  margin: 0.2rem;
 }

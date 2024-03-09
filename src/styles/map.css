@@ -1,0 +1,11 @@
+#map-container {
+  margin: 0.8rem;
+  width: 100%;
+  max-width: 50rem;
+  height: 30rem;
+  z-index: 20;
+}
+
+#map-container:hover {
+  cursor: default;
+}
