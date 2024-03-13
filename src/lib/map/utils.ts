@@ -4,17 +4,21 @@ import { Location } from '../../types'
 
 /* TODO: separate files */
 
-function createLocation(latlng: LatLng, map: Map): void {
+async function createLocation(latlng: LatLng, map: Map): Promise<Location> {
   /* TODO: add name input */
   const name = 'new location'
-  
-  const locations: Location[] = addLocation({
-    latlng,
+  const { lat, lng } = latlng
+
+  const location: Location = await addLocation({
+    lat,
+    lng,
     name
   })
   
   map.closePopup()
-  map.fireEvent('marker-added', { locations })
+  map.fireEvent('marker-added', { location })
+
+  return location
 }
 
 function roundLatLng(value: number, precision: number = 4): number {

@@ -2,7 +2,8 @@ import { LatLng } from "leaflet"
 
 export type LocationData = {
   name: string
-  latlng: LatLng
+  lat: number
+  lng: number
 }
 
 export type Location = {

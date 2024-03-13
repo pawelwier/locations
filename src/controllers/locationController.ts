@@ -1,18 +1,21 @@
-import { locations } from "../data";
-import { Location, LocationData } from "../types";
+import { Location, LocationData } from "../types"
+import { FetchMethod, fetchData } from "./controllerUtils"
 
-export function getLocations(): Location[] {
-  /* TODO: get db results */
-  return locations
+// TODO: move to .env
+const API_URL = 'http://localhost:5050'
+
+export async function getLocations(): Promise<Location[]> {
+  const url = `${API_URL}/locations`
+  return await fetchData<Location[]>({
+    url
+  })
 }
 
-export function addLocation(data: LocationData): Location[] {
-  /* TODO: add to db, return record */
-  const location = {
-    id: Math.random().toString(),
-    ...data,
-  }
-  locations.push(location)
-
-  return locations
+export async function addLocation(data: LocationData): Promise<Location> {
+  const url = `${API_URL}/locations`
+  return await fetchData<Location>({
+    url,
+    method: FetchMethod.POST,
+    body: JSON.stringify(data)
+  })
 }
