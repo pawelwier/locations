@@ -1,18 +1,19 @@
 <script lang="ts">
 import Modal from "../common/Modal.svelte"
-import { selectedLocationStore } from "../../stores/mapStores";
+import { getLatText, getLngText } from "./utils"
 
-$: ({ latlng } = $selectedLocationStore!)
-
-$: ({ lat, lng } = latlng)
+export let lat: number
+export let lng: number
 </script>
 
 <Modal open>
-  <!-- TODO: add data, form -->
   <div>
-    {lat}
+    {getLatText(lat, 6)}
   </div>
+  
   <div>
-    {lng}
+    {getLngText(lng, 6)}
   </div>
+
+  <slot />
 </Modal>

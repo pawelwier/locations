@@ -13,9 +13,14 @@ export async function getLocations(): Promise<Location[]> {
 
 export async function addLocation(data: LocationData): Promise<Location> {
   const url = `${API_URL}/locations`
+  const { name, lat, lng } = data
   return await fetchData<Location>({
     url,
     method: FetchMethod.POST,
-    body: JSON.stringify(data)
+    body: JSON.stringify({
+      name,
+      lat,
+      lng
+    })
   })
 }

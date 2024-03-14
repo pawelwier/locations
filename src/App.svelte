@@ -1,8 +1,8 @@
 <script lang="ts">
-import Modal from "./lib/common/Modal.svelte"
+import CreateMarkerModal from "./lib/map/CreateMarkerModal.svelte";
 import Map from "./lib/map/Map.svelte"
-  import MarkerModal from "./lib/map/MarkerModal.svelte";
-  import { selectedLocationStore } from "./stores/mapStores";
+import MarkerDetailsModal from "./lib/map/MarkerDetailsModal.svelte";
+import { createLocationStore, selectedLocationStore } from "./stores/mapStores"
 
 </script>
 
@@ -10,6 +10,9 @@ import Map from "./lib/map/Map.svelte"
   <Map />
 
   {#if $selectedLocationStore}
-    <MarkerModal />
+    <MarkerDetailsModal />
+  {/if}
+  {#if $createLocationStore}
+    <CreateMarkerModal />
   {/if}
 </main>

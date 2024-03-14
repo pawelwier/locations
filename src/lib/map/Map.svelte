@@ -1,13 +1,13 @@
 <script lang="ts">
 import { onMount } from 'svelte'
-import { map as drawMap, marker, tileLayer, type LatLngTuple, Map, Marker } from 'leaflet'
+import { map as drawMap, marker, tileLayer, type LatLngTuple, Map, Marker, LeafletEvent } from 'leaflet'
 import { addMapEventListeners } from './utils'
 import { type Location } from '../../types'
-import { selectedLocationStore } from '../../stores/mapStores'
+import { mapStore, selectedLocationStore } from '../../stores/mapStores'
 import { getLocations } from '../../controllers/locationController'
 
 const mapUrl: string = 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png'
-const initialView: LatLngTuple = [52, 19]
+const initialView: LatLngTuple = [45, 19]
 let mapElement: HTMLElement | null
 
 let map: Map
@@ -47,11 +47,13 @@ onMount(async () => {
   if (mapElement) {    
     const map = createMap(mapElement)
     await loadLocations()
-
-    map.on('marker-added', async (e) => {
+    mapStore.set(map)
+    map.on('marker-added', async (e: LeafletEvent) => {
       await loadLocations()
-      const x = e as unknown as { locations: Location[] }
+      const event = e as unknown as { location: Location }
+
       // TODO: add alert modal
+      console.log('new location:', event.location.name, 'created')
     })
   }
 })
