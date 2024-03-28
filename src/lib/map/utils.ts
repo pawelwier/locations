@@ -44,14 +44,14 @@ export function getLatText(lat: number, precision: number = 4): string {
 
 function getAddLocationBtn(latlng: LatLng, map: Map): HTMLElement {
   const { lat, lng } = latlng
+  
   const addLocationBtn: HTMLElement = document.createElement('button')
-
   addLocationBtn.innerHTML = 'Add location<br>'
   addLocationBtn.innerHTML += getLngText(lng)
   addLocationBtn.innerHTML += '<br>'
   addLocationBtn.innerHTML += getLatText(lat)
   addLocationBtn.onclick = () => openCreateLocationModal(latlng, map)
-  addLocationBtn.classList.add('add-location-btn')
+  addLocationBtn.classList.add('btn', 'btn-primary', 'add-location-btn')
   
   return addLocationBtn
 }

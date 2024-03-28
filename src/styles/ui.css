@@ -1,26 +1,29 @@
-.context-menu-container {
-  position: absolute;
-  width: 8rem;
-  height: 8rem;
-  color: #FFF;
-  background-color: var(--grey-dark);
-  z-index: 99;
-  border-radius: 0.3rem;
-}
-
-.add-location-btn {
-  background-color: #4310b8;
-  color: #FFF;
+.btn {
   cursor: pointer;
   outline: none;
   border: none;
   border-radius: 0.45rem;
-  width:100%;
   text-transform: uppercase;
+  padding: 0.4rem;
 }
 
-.add-location-btn:hover {
+.btn-primary {
+  background-color: var(--purple);
+  color: #FFF;
+}
+
+.btn-secondary {
+  color: var(--purple);
+  background-color: #FFF;
+  border: 1px var(--purple) solid;
+}
+
+.btn:hover {
   opacity: 0.8;
+}
+
+.add-location-btn {
+  width:100%;
 }
 
 .leaflet-popup-content {

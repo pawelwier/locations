@@ -1,6 +1,7 @@
 <script lang="ts">
-import Modal from "../common/Modal.svelte"
-import { getLatText, getLngText } from "./utils"
+import Modal from "../../common/Modal.svelte"
+import { getLatText, getLngText } from "../utils"
+import MarkerModalBtns from "./MarkerModalBtns.svelte"
 
 export let lat: number
 export let lng: number
@@ -16,4 +17,6 @@ export let lng: number
   </div>
 
   <slot />
+
+  <MarkerModalBtns />
 </Modal>

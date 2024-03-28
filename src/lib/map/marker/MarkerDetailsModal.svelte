@@ -1,6 +1,6 @@
 <script lang="ts">
+import { selectedLocationStore } from "../../../stores/mapStores";
 import MarkerModal from "./MarkerModal.svelte";
-import { selectedLocationStore } from "../../stores/mapStores"
 
 $: ({ latlng, name } = $selectedLocationStore!)
 $: ({ lat, lng } = latlng)

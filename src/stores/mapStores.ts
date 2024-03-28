@@ -5,3 +5,8 @@ import { Location } from "../types"
 export const mapStore: Writable<Map | null> = writable(null)
 export const selectedLocationStore: Writable<Location | null> = writable(null)
 export const createLocationStore: Writable<LatLngLiteral | null> = writable(null)
+
+export function resetLocationStores(): void {
+  selectedLocationStore.set(null)
+  createLocationStore.set(null)
+}

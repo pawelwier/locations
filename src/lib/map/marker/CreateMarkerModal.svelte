@@ -1,7 +1,7 @@
 <script lang="ts">
-import MarkerModal from "./MarkerModal.svelte";
-import { createLocationStore } from "../../stores/mapStores"
-import { createLocation } from './utils';
+import MarkerModal from "./MarkerModal.svelte"
+import { createLocationStore } from "../../../stores/mapStores"
+import { createLocation } from '../utils';
 
 let name: string = ''
 
