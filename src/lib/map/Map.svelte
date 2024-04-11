@@ -8,18 +8,18 @@ import { getLocations } from '../../controllers/locationController'
 
 const mapUrl: string = 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png'
 const initialView: LatLngTuple = [45, 19]
-let mapElement: HTMLElement | null
 
+let mapElement: HTMLElement | null
 let map: Map
 let locations: Location[] = []
 
 function createMap(container: HTMLElement): Map {
   map = drawMap(container, { preferCanvas: true })
-    .setView(initialView, 6.22)
+    .setView(initialView, 7)
   
   tileLayer(
     mapUrl,
-    { maxZoom: 10 }
+    { maxZoom: 20 }
   ).addTo(map)
 
   addMapEventListeners(map)

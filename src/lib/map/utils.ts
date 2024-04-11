@@ -1,7 +1,8 @@
 import { LatLng, LeafletMouseEvent, type Map } from 'leaflet'
-import { createLocationStore, mapStore } from '../../stores/mapStores'
+import { createLocationStore, mapStore, resetLocationStores } from '../../stores/mapStores'
 import { addLocation } from '../../controllers/locationController'
 import { Location } from '../../types'
+import { pendingActionStore } from '../../stores/utilStores'
 
 /* TODO: separate files */
 
@@ -24,7 +25,8 @@ export async function createLocation(name: string, lat: number, lng: number): Pr
   
   mapStore.subscribe(map => map && map.fireEvent('marker-added', { location }))
   createLocationStore.set(null)
-
+  pendingActionStore.set(null)
+  
   return location
 }
 

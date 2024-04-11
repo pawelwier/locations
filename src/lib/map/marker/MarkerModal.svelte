@@ -5,6 +5,9 @@ import MarkerModalBtns from "./MarkerModalBtns.svelte"
 
 export let lat: number
 export let lng: number
+export let canCancel: boolean = true
+export let canEdit: boolean = false
+export let canCreate: boolean = false
 </script>
 
 <Modal open>
@@ -18,5 +21,11 @@ export let lng: number
 
   <slot />
 
-  <MarkerModalBtns />
+  <MarkerModalBtns
+    {canCancel}
+    {canEdit}
+    {canCreate}
+    on:create
+    on:edit
+  />
 </Modal>

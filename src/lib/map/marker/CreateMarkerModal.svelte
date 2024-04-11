@@ -9,17 +9,13 @@ $: ({ lat, lng } = $createLocationStore!)
 </script>
 
 <MarkerModal
+  canCreate
   {lat}
   {lng}
+  on:create={() => createLocation(name, lat, lng)}
 >
-  <form on:submit|preventDefault={() => createLocation(name, lat, lng)}>
-    <input 
-      type="text" 
-      bind:value={name}
-    />
-    <!-- TODO: move btn to bottom modal btn component -->
-    <button>
-      Add
-    </button>
-  </form>
+  <input 
+    type="text" 
+    bind:value={name}
+  />
 </MarkerModal>

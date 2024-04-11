@@ -7,6 +7,7 @@ $: ({ lat, lng } = latlng)
 </script>
 
 <MarkerModal
+  canEdit
   {lat}
   {lng}
 >
