@@ -24,3 +24,11 @@ export async function addLocation(data: LocationData): Promise<Location> {
     })
   })
 }
+
+export async function removeLocation(id: string): Promise<void> {
+  const url = `${API_URL}/locations/${id}`
+  return await fetchData<void>({
+    url,
+    method: FetchMethod.DELETE
+  })
+}

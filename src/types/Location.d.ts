@@ -7,7 +7,7 @@ export type LocationData = {
 }
 
 export type Location = {
-  id: string // mongo id
+  _id: { $oid: string } // mongo id
   name: string
   latlng: LatLng
   /* 

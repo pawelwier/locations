@@ -1,6 +1,6 @@
 <script lang="ts">
 import { onMount } from 'svelte'
-import { map as drawMap, marker, tileLayer, type LatLngTuple, Map, Marker, LeafletEvent } from 'leaflet'
+import { map as drawMap, marker, tileLayer, type LatLngTuple, Map, Marker } from 'leaflet'
 import { addMapEventListeners } from './utils'
 import { type Location } from '../../types'
 import { mapStore, selectedLocationStore } from '../../stores/mapStores'
@@ -22,7 +22,7 @@ function createMap(container: HTMLElement): Map {
     { maxZoom: 20 }
   ).addTo(map)
 
-  addMapEventListeners(map)
+  addMapEventListeners(map, loadLocations)
 
   return map
 }
@@ -37,24 +37,19 @@ function displayLocationMarkers(m: Map, locationList: Location[]): void {
   })
 }
 
-async function loadLocations(): Promise<void> {
+async function loadLocations(m: Map): Promise<void> {
   locations = await getLocations()
-  displayLocationMarkers(map, locations)
+  console.log(locations)
+  displayLocationMarkers(m, locations)
 }
 
 onMount(async () => {
   mapElement = document.getElementById('map-container')
   if (mapElement) {    
     const map = createMap(mapElement)
-    await loadLocations()
+    
+    await loadLocations(map)
     mapStore.set(map)
-    map.on('marker-added', async (e: LeafletEvent) => {
-      await loadLocations()
-      const event = e as unknown as { location: Location }
-
-      // TODO: add alert modal
-      console.log('new location:', event.location.name, 'created')
-    })
   }
 })
 </script>

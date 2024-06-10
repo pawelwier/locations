@@ -1,7 +1,7 @@
 <script lang="ts">
 import MarkerModal from "./MarkerModal.svelte"
 import { createLocationStore } from "../../../stores/mapStores"
-import { createLocation } from '../utils';
+import { createLocation } from '../../location/fn';
 
 let name: string = ''
 
@@ -12,6 +12,7 @@ $: ({ lat, lng } = $createLocationStore!)
   canCreate
   {lat}
   {lng}
+  {name}
   on:create={() => createLocation(name, lat, lng)}
 >
   <input 

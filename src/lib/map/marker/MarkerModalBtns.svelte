@@ -8,6 +8,8 @@ import { pendingActionStore } from "../../../stores/utilStores";
 export let canCancel: boolean
 export let canEdit: boolean
 export let canCreate: boolean
+export let canDelete: boolean
+export let name: string
 
 const dispatch: EventDispatcher<any> = createEventDispatcher()
 
@@ -40,9 +42,17 @@ $: isActionPending = (action: LocationActionEnum) => {
 
   {#if canCreate}
     <Button
-      disabled={isActionPending(LocationActionEnum.CREATE)}
+      disabled={isActionPending(LocationActionEnum.CREATE) || !name}
       text='Create'
       on:click={() => dispatchAction(LocationActionEnum.CREATE)}
+    />
+  {/if}
+
+  {#if canDelete}
+    <Button
+      disabled={isActionPending(LocationActionEnum.DELETE)}
+      text='Delete'
+      on:click={() => dispatchAction(LocationActionEnum.DELETE)}
     />
   {/if}
 </div>
