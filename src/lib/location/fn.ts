@@ -1,4 +1,4 @@
-import { createLocationStore, mapStore } from '../../stores/mapStores'
+import { createLocationStore, mapStore, selectedLocationStore } from '../../stores/mapStores'
 import { addLocation, removeLocation } from '../../controllers/locationController'
 import { pendingActionStore } from '../../stores/utilStores'
 import { Location } from '../../types'
@@ -17,10 +17,11 @@ export async function createLocation(name: string, lat: number, lng: number): Pr
   return location
 }
 
-export async function deleteLocation(id: string): Promise<void> {
-  await removeLocation(id)
+export async function deleteLocation(location: Location | null): Promise<void> {
+  if (!location) return
+  await removeLocation(location._id.$oid)
 
-  mapStore.subscribe(map => map && map.fireEvent('marker-removed'))
-  createLocationStore.set(null)
+  mapStore.subscribe(map => map && map.fireEvent('marker-removed', { location }))
+  selectedLocationStore.set(null)
   pendingActionStore.set(null)
 }

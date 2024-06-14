@@ -22,7 +22,7 @@ function createMap(container: HTMLElement): Map {
     { maxZoom: 20 }
   ).addTo(map)
 
-  addMapEventListeners(map, loadLocations)
+  addMapEventListeners(map)
 
   return map
 }
@@ -31,25 +31,21 @@ function displayLocationMarkers(m: Map, locationList: Location[]): void {
   locationList.forEach(location => {
     const { latlng } = location
     const locationMarker: Marker = marker(latlng).addTo(m)
-    locationMarker.on('click', e => {
+    locationMarker.on('click', () => {
       selectedLocationStore.set(location)
     })
   })
 }
 
-async function loadLocations(m: Map): Promise<void> {
-  locations = await getLocations()
-  console.log(locations)
-  displayLocationMarkers(m, locations)
-}
-
 onMount(async () => {
   mapElement = document.getElementById('map-container')
-  if (mapElement) {    
+  if (mapElement) {
     const map = createMap(mapElement)
     
-    await loadLocations(map)
+    locations = await getLocations()
     mapStore.set(map)
+
+    $mapStore && displayLocationMarkers($mapStore, locations)
   }
 })
 </script>

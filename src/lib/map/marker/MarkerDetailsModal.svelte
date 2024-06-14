@@ -3,7 +3,7 @@ import { selectedLocationStore } from "../../../stores/mapStores";
 import { deleteLocation } from "../../location/fn";
 import MarkerModal from "./MarkerModal.svelte";
 
-$: ({ latlng, name, _id } = $selectedLocationStore!)
+$: ({ latlng, name } = $selectedLocationStore!)
 $: ({ lat, lng } = latlng)
 </script>
 
@@ -12,7 +12,7 @@ $: ({ lat, lng } = latlng)
   canDelete
   {lat}
   {lng}
-  on:delete={() => deleteLocation(_id.$oid)}
+  on:delete={() => deleteLocation($selectedLocationStore)}
 >
   <!-- TODO: finish, add edit -->
   {name}
