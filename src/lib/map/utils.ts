@@ -1,4 +1,4 @@
-import { LeafletMouseEvent, type Map, LeafletEvent, marker, Marker, Layer, LatLng } from 'leaflet'
+import { LeafletMouseEvent, type Map, LeafletEvent, marker, Marker, LatLng } from 'leaflet'
 import { Location } from '../../types'
 import { getAddLocationBtn } from '../location/utils'
 import { selectedLocationStore } from '../../stores/mapStores'

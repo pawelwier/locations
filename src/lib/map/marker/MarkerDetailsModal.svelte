@@ -1,9 +1,9 @@
 <script lang="ts">
 import { selectedLocationStore } from "../../../stores/mapStores";
-import { deleteLocation } from "../../location/fn";
+import { deleteLocation, editLocation } from "../../location/fn";
 import MarkerModal from "./MarkerModal.svelte";
 
-$: ({ latlng, name } = $selectedLocationStore!)
+$: ({ latlng, name, _id } = $selectedLocationStore!)
 $: ({ lat, lng } = latlng)
 </script>
 
@@ -13,7 +13,8 @@ $: ({ lat, lng } = latlng)
   {lat}
   {lng}
   on:delete={() => deleteLocation($selectedLocationStore)}
+  on:edit={() => editLocation(_id.$oid, { name: 'i\'m not a real name' })}
 >
-  <!-- TODO: finish, add edit -->
+  <!-- TODO: add edit form -->
   {name}
 </MarkerModal>

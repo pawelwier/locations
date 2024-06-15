@@ -6,6 +6,12 @@ export type LocationData = {
   name?: string
 }
 
+export type LocationUpdateData = {
+  lat?: number
+  lng?: number
+  name?: string
+}
+
 export type Location = {
   _id: { $oid: string } // mongo id
   name: string
