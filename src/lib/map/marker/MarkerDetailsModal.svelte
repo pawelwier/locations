@@ -5,16 +5,25 @@ import MarkerModal from "./MarkerModal.svelte";
 
 $: ({ latlng, name, _id } = $selectedLocationStore!)
 $: ({ lat, lng } = latlng)
+
+function onEditLocation(e: CustomEvent<{ name: string, lat: number, lng: number }>): void {
+  const { name, lat, lng } = e.detail
+  const updateData = {
+    name,
+    lat: Number(lat),
+    lng: Number(lng),
+  }
+  editLocation(_id.$oid, updateData)
+}
 </script>
 
+<!-- TODO: remove one layer -->
 <MarkerModal
   canEdit
   canDelete
   {lat}
   {lng}
-  on:delete={() => deleteLocation($selectedLocationStore)}
-  on:edit={() => editLocation(_id.$oid, { name: 'i\'m not a real name' })}
->
-  <!-- TODO: add edit form -->
   {name}
-</MarkerModal>
+  on:delete={() => deleteLocation($selectedLocationStore)}
+  on:edit={e => onEditLocation(e)}
+/>

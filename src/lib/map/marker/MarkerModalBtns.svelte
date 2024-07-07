@@ -1,9 +1,9 @@
 <script lang="ts">
-import { createEventDispatcher, type EventDispatcher } from "svelte";
-import { resetLocationStores } from "../../../stores/mapStores"
-import Button from "../../common/Button.svelte";
-import { LocationActionEnum } from "../../../types";
-import { pendingActionStore } from "../../../stores/utilStores";
+import { createEventDispatcher, type EventDispatcher } from 'svelte'
+import { resetLocationStores } from '../../../stores/mapStores'
+import Button from '../../common/Button.svelte'
+import { LocationActionEnum } from '../../../types'
+import { pendingActionStore } from '../../../stores/utilStores'
 
 export let canCancel: boolean
 export let canEdit: boolean
